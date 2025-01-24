@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <h1>Lista de Tareas</h1>
+    <ul>
+        {% for tarea in tareas %}
+            <li>{{ tarea.titulo }} - {% if tarea.completada %}Completada{% else %}Pendiente{% endif %}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
