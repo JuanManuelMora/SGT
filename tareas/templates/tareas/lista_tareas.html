@@ -4,13 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tareas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Lista de Tareas</h1>
-    <ul>
-        {% for tarea in tareas %}
-            <li>{{ tarea.titulo }} - {% if tarea.completada %}Completada{% else %}Pendiente{% endif %}</li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-5">
+        <h1 class="text-center">Sistemas de Gestión de Tareas</h1>
+        <div class="text-end mb-3">
+            <!-- Botón para crear una nueva tarea -->
+            <a href="{% url 'crear_tarea' %}" class="btn btn-primary">Crear Nueva Tarea</a>
+        </div>
+
+        <!-- Tabla para mostrar las tareas -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Estado</th>
+                    <th>Fecha de Creación</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarea in tareas %}
+                <tr>
+                    <td>{{ tarea.titulo }}</td>
+                    <td>
+                        {% if tarea.completada %}
+                        <span class="badge bg-success">Completada</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ tarea.fecha_creacion|date:"d-m-Y H:i" }}</td>
+                    <td>
+                        {% if tarea.fecha_vencimiento %}
+                        {{ tarea.fecha_vencimiento|date:"d-m-Y H:i" }}
+                        {% else %}
+                        <em>No definida</em>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <!-- Enlace para marcar como completada -->
+                        {% if not tarea.completada %}
+                        <a href="{% url 'completar_tarea' tarea.id %}" class="btn btn-success btn-sm">Completar</a>
+                        {% endif %}
+                        
+                        <!-- Enlace para editar -->
+                        <a href="{% url 'editar_tarea' tarea.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                        
+                        <!-- Enlace para eliminar -->
+                        <a href="{% url 'eliminar_tarea' tarea.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

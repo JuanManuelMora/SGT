@@ -4,21 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Tarea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Editar Tarea</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="titulo">Título:</label><br>
-        <input type="text" id="titulo" name="titulo" value="{{ tarea.titulo }}" required><br><br>
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-secondary text-white text-center">
+                <h3>Editar Tarea</h3>
+            </div>
+            <div class="card-body">
+                <!-- Mostrar mensajes de error (opcional) -->
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
 
-        <label for="descripcion">Descripción:</label><br>
-        <textarea id="descripcion" name="descripcion" required>{{ tarea.descripcion }}</textarea><br><br>
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título:</label>
+                        <input type="text" id="titulo" name="titulo" class="form-control" value="{{ tarea.titulo }}" required>
+                    </div>
 
-        <label for="fecha_vencimiento">Fecha de Vencimiento:</label><br>
-        <input type="datetime-local" id="fecha_vencimiento" name="fecha_vencimiento" value="{{ tarea.fecha_vencimiento|date:'Y-m-d\\TH:i' }}"><br><br>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" class="form-control" rows="4" required>{{ tarea.descripcion }}</textarea>
+                    </div>
 
-        <button type="submit">Guardar</button>
-    </form>
+                    <div class="mb-3">
+                        <label for="fecha_vencimiento" class="form-label">Fecha de Vencimiento:</label>
+                        <input type="datetime-local" id="fecha_vencimiento" name="fecha_vencimiento" 
+                               class="form-control" 
+                               value="{{ tarea.fecha_vencimiento|date:'Y-m-d\\TH:i' }}" required>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <a href="{% url 'lista_tareas' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript para evitar fechas en el pasado -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fechaInput = document.getElementById("fecha_vencimiento");
+            let ahora = new Date();
+            let fechaMinima = ahora.toISOString().slice(0, 16);
+            fechaInput.min = fechaMinima;
+        });
+    </script>
 </body>
 </html>
