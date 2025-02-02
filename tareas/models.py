@@ -3,6 +3,7 @@ from django.db import models
 # vencimiento posteriores a la fecha actual.
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 def validar_fecha_futura(value):
     if value < now():
@@ -10,6 +11,7 @@ def validar_fecha_futura(value):
 
 # Create your models here.
 class Tarea(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con usuario
     titulo = models.CharField(max_length = 200, db_column='sgt_titulo')
     descripcion = models.TextField(db_column='sgt_descripcion')
     completada = models.BooleanField(default = False, db_column='sgt_completada')

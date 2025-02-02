@@ -29,6 +29,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Configuración de autenticación
+LOGIN_REDIRECT_URL = 'lista_tareas'  # Redirigir a la lista de tareas después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'login'  # Redirigir al login después de cerrar sesión
+LOGIN_URL = 'login'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'moralcorpprojects@gmail.com'
+EMAIL_HOST_PASSWORD = 'ahpz lbqh eihq dqzn'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Backend predeterminado
+]
+
+# Configurar email obligatorio
+AUTH_USER_MODEL = 'auth.User'
+
+
 
 # Application definition
 
