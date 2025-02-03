@@ -4,6 +4,12 @@
 
 Este es un sistema de gestión de tareas que permite a los usuarios crear, editar, completar y eliminar tareas. También cuenta con notificaciones por correo para alertar sobre tareas próximas a vencer.
 
+<div align="center">
+
+[Inglés](/SGT/README_en/README_en.md)
+
+</div>
+
 ---
 ## 📖 Características
 ✅ **CRUD de tareas**: Crear, leer, actualizar y eliminar tareas fácilmente.  
