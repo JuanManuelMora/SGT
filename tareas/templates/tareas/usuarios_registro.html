@@ -8,22 +8,22 @@
             {% csrf_token %}
             
             <div class="mb-3">
-                <label class="form-label">Nombre de Usuario</label>
+                <label class="form-label" for="{{ form.username.id_for_label }}">Nombre de Usuario</label>
                 {{ form.username }}
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Correo Electrónico</label>
+                <label class="form-label" for="{{ form.email.id_for_label }}">Correo Electrónico</label>
                 {{ form.email }}
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Contraseña</label>
+                <label class="form-label" for="{{ form.password1.id_for_label }}">Contraseña</label>
                 {{ form.password1 }}
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Confirmar Contraseña</label>
+                <label class="form-label" for="{{ form.password2.id_for_label }}">Confirmar Contraseña</label>
                 {{ form.password2 }}
             </div>
 
